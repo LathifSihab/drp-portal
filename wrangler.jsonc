@@ -1,0 +1,43 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	// Top level = local development (`npm run dev`); app addresses then come from .env.
+	"name": "drp-portal-dev",
+	"compatibility_date": "2026-11-11",
+	"compatibility_flags": ["nodejs_compat"],
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
+	"workers_dev": false,
+	"preview_urls": false,
+	"env": {
+		"staging": {
+			// https://drp-portal-staging.goosebumpsevents.workers.dev, behind Cloudflare Access.
+			"name": "drp-portal-staging",
+			"workers_dev": true,
+			"preview_urls": false,
+			"vars": {
+				"APP_ENV": "staging",
+				"OPERATIONAL_URL": "https://drp-operational-staging.goosebumpsevents.workers.dev",
+				// The CMS has no staging site (only Netlify deploy previews), so its tile stays unlinked.
+				"CMS_URL": "",
+				"CLIENTZONE_ADMIN_URL": "https://drpbuildlab-clientzone.netlify.app/admin"
+			}
+		},
+		"production": {
+			// https://drp-portal.goosebumpsevents.workers.dev, behind Cloudflare Access. Moves to
+			// internal.drpbuildlab.dev if that domain is bought (drp-operational docs/INTERNAL_GATEWAY.md).
+			"name": "drp-portal",
+			"workers_dev": true,
+			"preview_urls": false,
+			"vars": {
+				"APP_ENV": "production",
+				"OPERATIONAL_URL": "https://drp-operational.goosebumpsevents.workers.dev",
+				"CMS_URL": "https://cms.drpbuildlab.com",
+				"CLIENTZONE_ADMIN_URL": "https://clientzone.drpbuildlab.com/admin"
+			}
+		}
+	},
+	"vars": { "APP_ENV": "development" }
+}
