@@ -19,7 +19,8 @@
 			"preview_urls": false,
 			"vars": {
 				"APP_ENV": "staging",
-				"OPERATIONAL_URL": "https://drp-operational-staging.goosebumpsevents.workers.dev",
+				// Operational staging is no longer used (2026-11-21), so its tile stays unlinked.
+				"OPERATIONAL_URL": "",
 				// The CMS has no staging site (only Netlify deploy previews), so its tile stays unlinked.
 				"CMS_URL": "",
 				"CLIENTZONE_ADMIN_URL": "https://drpbuildlab-clientzone.netlify.app/admin"
